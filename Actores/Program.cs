@@ -1,79 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 
-namespace Actores
+namespace Ecuacion_por_los_puntos
 {
-    class actor
-    {
-        private string act;
-        private Int16 añoa;
-        public actor(string a, Int16 p)
-        {
-            act = a;
-            añoa = p;
-        }
-        public string getActor()
-        {
-            return act;
-        }
-        public Int16 getAñoa()
-        {
-            return añoa;
-        }
-    }
-    class Peliculas
-    {
-       private string nombre;
-       private Int16 año;
-       private List<actor> actores;
-       public Peliculas(string nombre, Int16 año)
-       {
-           this.nombre=nombre;
-           this.año=año;
-           actores = new List <actor>();
-       }
-
-       public string getPelicula()
-       {
-           return nombre;
-       }
-       public int getAñoP()
-       {
-           return año;
-       }
-       public void AgregaActor(actor a)
-       {
-           actores.Add(a);
-       }
-       public void ImprimeActores()
-       {
-           Console.WriteLine("La pelicula " + "{0}" + " fue estrenada en el año " + "{1}", nombre,año);
-           foreach (actor a in actores){
-               Console.WriteLine("El papel principal fue interpretado por " + "{0}" + " nacido(a) en el año " + "{1}", a.getActor(), a.getAñoa());
-           }
-           Console.WriteLine();
-       }
-    }
     class Program
     {
         static void Main(string[] args)
         {
-            Peliculas p1 = new Peliculas ("Avengers", 2012);
-            p1.AgregaActor(new actor ("Robert Dawney JR", 1965));
-            p1.ImprimeActores();
-            Peliculas p2 = new Peliculas ("Joker", 2019);
-            p2.AgregaActor(new actor ("Joaquin Phoenix", 1974));
-            p2.ImprimeActores();
-            Peliculas p3 = new Peliculas ("Rapido y Furioso", 2009);
-            p3.AgregaActor(new actor ("Vin Diesel", 1967));
-            p3.ImprimeActores();
-            Peliculas p4 = new Peliculas ("Jurassic World", 2015);
-            p4.AgregaActor(new actor ("Chris Pratt", 1979));
-            p4.ImprimeActores();
-            Peliculas p5 = new Peliculas ("King Kong", 2005);
-            p5.AgregaActor(new actor ("Naomi Watts", 1968));
-            p5.ImprimeActores();
+            double[] PuntoO = new double[3];
+            PuntoO[0] = 0;
+            PuntoO[1] = 0;
+            PuntoO[2] = 0;
 
+            double[] PuntoP = new double[3];
+            PuntoP[0] = 1;
+            PuntoP[1] = 2;
+            PuntoP[2] = 3;
+
+            double[] PuntoQ = new double[3];
+            PuntoQ[0] = -2;
+            PuntoQ[1] = 3;
+            PuntoQ[2] = 3;
+
+            double[] vectorU = new double[3];
+            vectorU[0] = PuntoO[0] - PuntoP[0];
+            vectorU[1] = PuntoO[1] - PuntoP[1];
+            vectorU[2] = PuntoO[2] - PuntoP[2];
+
+            Console.WriteLine("{0}i", vectorU[0]);
+            Console.WriteLine("{0}j", vectorU[1]);
+            Console.WriteLine("{0}k", vectorU[2]);
+            Console.WriteLine("");
+
+            double[] vectorV = new double[3];
+            vectorV[0] = PuntoQ[0] - PuntoP[0];
+            vectorV[1] = PuntoQ[1] - PuntoP[1];
+            vectorV[2] = PuntoQ[2] - PuntoP[2];
+
+            Console.WriteLine("{0}i", vectorV[0]);
+            Console.WriteLine("{0}j", vectorV[1]);
+            Console.WriteLine("{0}k", vectorV[2]);
+            Console.WriteLine("");
+
+            double[] vectorN = new double[3];
+            vectorN[0] = (vectorU[1] * vectorV[2]) + (-(vectorU[2] * vectorV[1]));
+            vectorN[1] = (vectorU[0] * vectorV[2]) + (-(vectorU[2] * vectorV[0])) * -1;
+            vectorN[2] = (vectorU[0] * vectorV[1]) + (-(vectorU[1] * vectorV[0]));
+
+            Console.WriteLine("{0}i", vectorN[0]);
+            Console.WriteLine("{0}j", vectorN[1]);
+            Console.WriteLine("{0}k", vectorN[2]);
+
+            double producto = (-PuntoP[0] * vectorN[0]) + (-PuntoP[1] * vectorN[1]) + (-PuntoP[2] * vectorN[2]);
+            Console.WriteLine("\n Ecuacion que pasa por el punto: {0}x {1}y {2}z = {3}", vectorN[0], vectorN[1], vectorN[2], producto);
         }
     }
 }
